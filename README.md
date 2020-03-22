@@ -6,10 +6,10 @@
     git clone https://github.com/USERNAME/sef-data-holder
     cd sef-data-holder
     ```
-- Set Username and a password as environment variables
+- Set Youtube API key and Youtube playlist ID as environment variables
     ```
     export YOUTUBE_API_KEY==your_youtube_api_key
-    export LIVE_PLAYLIST_ID=your_playlist_id
+    export YOUTUBE_PLAYLIST_ID=your_playlist_id
     ```
 - Build the project
     ```
@@ -17,6 +17,6 @@
     ```
 - Run the generated jar file
     ```
-    java -jar target/data-holder.war
+    java -jar target/data-holder.jar
     ```
 - Visit your app at http://localhost:8080
