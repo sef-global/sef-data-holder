@@ -17,7 +17,7 @@
     ```
     export GOOGLE_API_KEY=your_google_api_key
     export YOUTUBE_PLAYLIST_ID=your_playlist_id
-    export CALENDAR_ID=your_calendar_id
+    export ONELIVE_CALENDAR_ID=your_calendar_id
     ```
     *Note: The Calendar should be public.*
 
