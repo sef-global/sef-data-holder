@@ -18,8 +18,8 @@ import java.nio.charset.StandardCharsets;
 @RestController
 public class CalendarAPI {
 
-    @GetMapping("/upcoming-events")
-    public void getUpcomingEvents(HttpServletRequest request, HttpServletResponse response) {
+    @GetMapping("/calendar/onelive")
+    public void getUpcomingOnelives(HttpServletRequest request, HttpServletResponse response) {
         String googleApiKey = System.getenv("GOOGLE_API_KEY");
         String calendarId = System.getenv("CALENDAR_ID");
         String url = "https://www.googleapis.com/calendar/v3/calendars/"+calendarId+"/events?key="+googleApiKey;
