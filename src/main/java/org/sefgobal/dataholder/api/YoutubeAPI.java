@@ -24,10 +24,10 @@ public class YoutubeAPI {
 
     @GetMapping("/past-one-lives")
     public void getOneLive(HttpServletRequest request, HttpServletResponse response) {
-        String youtubeApiKey = System.getenv("YOUTUBE_API_KEY");
+        String googleApiKey = System.getenv("GOOGLE_API_KEY");
         String youtubePlaylistId = System.getenv("YOUTUBE_PLAYLIST_ID");
         String url = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId="
-                + youtubePlaylistId + "&key=" + youtubeApiKey;
+                + youtubePlaylistId + "&key=" + googleApiKey;
 
         HttpClient httpclient = HttpClients.createDefault();
         HttpGet executor = new HttpGet(url);
