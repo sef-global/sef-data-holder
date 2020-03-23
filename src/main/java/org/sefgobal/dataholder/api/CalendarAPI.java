@@ -21,8 +21,8 @@ public class CalendarAPI {
     @GetMapping("/calendar/onelive")
     public void getUpcomingOnelives(HttpServletRequest request, HttpServletResponse response) {
         String googleApiKey = System.getenv("GOOGLE_API_KEY");
-        String calendarId = System.getenv("CALENDAR_ID");
-        String url = "https://www.googleapis.com/calendar/v3/calendars/"+calendarId+"/events?key="+googleApiKey;
+        String oneliveCalendarId = System.getenv("ONELIVE_CALENDAR_ID");
+        String url = "https://www.googleapis.com/calendar/v3/calendars/"+oneliveCalendarId+"/events?key="+googleApiKey;
 
         HttpClient httpclient = HttpClients.createDefault();
         HttpGet executor = new HttpGet(url);
