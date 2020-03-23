@@ -9,6 +9,8 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,12 +24,19 @@ import java.nio.charset.StandardCharsets;
 @RestController
 public class YoutubeAPI {
 
-    @GetMapping("/past-one-lives")
-    public void getOneLive(HttpServletRequest request, HttpServletResponse response) {
+    @GetMapping("/youtube/onelive")
+    public void getOneLive(@RequestParam(required = false) String nextPageToken, HttpServletResponse response) {
         String googleApiKey = System.getenv("GOOGLE_API_KEY");
         String youtubePlaylistId = System.getenv("YOUTUBE_PLAYLIST_ID");
         String url = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId="
-                + youtubePlaylistId + "&key=" + googleApiKey;
+                + youtubePlaylistId
+                + "&key="
+                + googleApiKey;
+
+        // Check if the user has sent a page token for the next page and add it to the url
+        if (nextPageToken != null) {
+            url = url + "&pageToken=" + nextPageToken;
+        }
 
         HttpClient httpclient = HttpClients.createDefault();
         HttpGet executor = new HttpGet(url);
