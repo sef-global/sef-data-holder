@@ -1,13 +1,9 @@
 package org.sefgobal.dataholder.api;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,14 +16,14 @@ import java.nio.charset.StandardCharsets;
 
 
 @RestController
-public class YoutubeAPI {
+public class CalendarAPI {
 
-    @GetMapping("/past-one-lives")
-    public void getOneLive(HttpServletRequest request, HttpServletResponse response) {
+    @GetMapping("/calendar/onelive")
+    public void getUpcomingOnelives(HttpServletRequest request, HttpServletResponse response) {
         String googleApiKey = System.getenv("GOOGLE_API_KEY");
-        String youtubePlaylistId = System.getenv("YOUTUBE_PLAYLIST_ID");
-        String url = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId="
-                + youtubePlaylistId + "&key=" + googleApiKey;
+        String oneliveCalendarId = System.getenv("ONELIVE_CALENDAR_ID");
+        String url = "https://www.googleapis.com/calendar/v3/calendars/" + oneliveCalendarId +
+                "/events?key=" + googleApiKey;
 
         HttpClient httpclient = HttpClients.createDefault();
         HttpGet executor = new HttpGet(url);

@@ -6,11 +6,21 @@
     git clone https://github.com/USERNAME/sef-data-holder
     cd sef-data-holder
     ```
-- Set Youtube API key and Youtube playlist ID as environment variables
+
+- Setup an API key for Google API 
+    - Use the tutorial given below.
+    https://support.google.com/googleapi/answer/6158862?hl=en
+    
+    - Enable Calender API and Youtube API on the Google API console
+
+- Set Google API key, Youtube playlist ID, Google Calendar ID as environment variables
     ```
-    export YOUTUBE_API_KEY==your_youtube_api_key
+    export GOOGLE_API_KEY=your_google_api_key
     export YOUTUBE_PLAYLIST_ID=your_playlist_id
+    export ONELIVE_CALENDAR_ID=your_calendar_id
     ```
+    *Note: The Calendar should be public.*
+
 - Build the project
     ```
     mvn install
