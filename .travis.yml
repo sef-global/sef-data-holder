@@ -1,0 +1,10 @@
+language: java
+sudo: true
+script: skip
+deploy:
+  provider: heroku
+  app: sef-dataholder
+  api_key: $HEROKU_KEY
+  on:
+    repo: sef-global/sef-data-holder
+    branch: master
