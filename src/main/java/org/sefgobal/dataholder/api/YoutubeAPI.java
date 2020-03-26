@@ -24,12 +24,15 @@ import java.nio.charset.StandardCharsets;
 @RestController
 public class YoutubeAPI {
 
+    private static final String MAX_RESULTS = "10";
     @GetMapping("/youtube/onelive")
     public void getOneLive(@RequestParam(required = false) String nextPageToken, HttpServletResponse response) {
         String googleApiKey = System.getenv("GOOGLE_API_KEY");
         String youtubePlaylistId = System.getenv("YOUTUBE_PLAYLIST_ID");
         String url = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId="
                 + youtubePlaylistId
+                + "&maxResults="
+                + MAX_RESULTS
                 + "&key="
                 + googleApiKey;
 
