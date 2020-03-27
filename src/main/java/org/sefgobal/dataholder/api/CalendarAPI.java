@@ -18,7 +18,6 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-
 @RestController
 public class CalendarAPI {
 
@@ -33,9 +32,12 @@ public class CalendarAPI {
         String formattedDateTime = timeNow.format(format);
         formattedDateTime = formattedDateTime.substring(0, 22) + ":" + formattedDateTime.substring(22);
         formattedDateTime = formattedDateTime.replace(":", "%3A").replace("+", "%2B");
-
-        String url = "https://www.googleapis.com/calendar/v3/calendars/" + oneliveCalendarId +
-                "/events?timeMin=" + formattedDateTime + "&key=" + googleApiKey;
+        String url = "https://www.googleapis.com/calendar/v3/calendars/" +
+                oneliveCalendarId +
+                "/events?timeMin=" +
+                formattedDateTime +
+                "&key=" +
+                googleApiKey;
 
         HttpClient httpclient = HttpClients.createDefault();
         HttpGet executor = new HttpGet(url);
