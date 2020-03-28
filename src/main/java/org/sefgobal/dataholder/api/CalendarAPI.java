@@ -25,7 +25,6 @@ public class CalendarAPI {
     public void getUpcomingOnelives(HttpServletRequest request, HttpServletResponse response) {
         String googleApiKey = System.getenv("GOOGLE_API_KEY");
         String oneliveCalendarId = System.getenv("ONELIVE_CALENDAR_ID");
-
         //Get the current time and format it to the RFC3339 format
         ZonedDateTime timeNow = ZonedDateTime.now();
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:'00':'00'Z");
