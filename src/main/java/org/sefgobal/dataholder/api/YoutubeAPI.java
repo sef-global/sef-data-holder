@@ -1,20 +1,17 @@
 package org.sefgobal.dataholder.api;
 
-import org.apache.http.HttpEntity;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.tomcat.util.buf.StringUtils;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletResponseWrapper;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -27,6 +24,7 @@ public class YoutubeAPI {
     private static final String MAX_RESULTS = "10";
     @GetMapping("/youtube/onelive")
     public void getOneLive(@RequestParam(required = false) String nextPageToken, HttpServletResponse response) {
+
         String googleApiKey = System.getenv("GOOGLE_API_KEY");
         String youtubePlaylistId = System.getenv("YOUTUBE_PLAYLIST_ID");
         String url = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId="
@@ -41,6 +39,7 @@ public class YoutubeAPI {
             url = url + "&pageToken=" + nextPageToken;
         }
 
+
         HttpClient httpclient = HttpClients.createDefault();
         HttpGet executor = new HttpGet(url);
         try {
@@ -53,7 +52,9 @@ public class YoutubeAPI {
                 result.append(line);
             }
             rd.close();
+            response.setContentType("application/json");
             response.getWriter().write(result.toString());
+
         } catch (IOException e) {
             response.setStatus(500);
         }

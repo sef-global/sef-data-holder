@@ -4,6 +4,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClients;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,7 +19,7 @@ import java.nio.charset.StandardCharsets;
 @RestController
 public class CalendarAPI {
 
-    @GetMapping("/calendar/onelive")
+    @GetMapping("/calendar/onelive" )
     public void getUpcomingOnelives(HttpServletRequest request, HttpServletResponse response) {
         String googleApiKey = System.getenv("GOOGLE_API_KEY");
         String oneliveCalendarId = System.getenv("ONELIVE_CALENDAR_ID");
@@ -37,9 +38,11 @@ public class CalendarAPI {
                 result.append(line);
             }
             rd.close();
+            response.setContentType("application/json");
             response.getWriter().write(result.toString());
         } catch (IOException e) {
             response.setStatus(500);
         }
     }
+
 }
