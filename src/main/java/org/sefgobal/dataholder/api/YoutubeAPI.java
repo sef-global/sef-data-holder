@@ -22,7 +22,6 @@ public class YoutubeAPI {
     private static final String MAX_RESULTS = "10";
     @GetMapping("/youtube/onelive")
     public void getOneLive(@RequestParam(required = false) String nextPageToken, HttpServletResponse response) {
-
         String googleApiKey = System.getenv("GOOGLE_API_KEY");
         String youtubePlaylistId = System.getenv("YOUTUBE_PLAYLIST_ID");
         String url = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId="
@@ -36,7 +35,6 @@ public class YoutubeAPI {
         if (nextPageToken != null) {
             url = url + "&pageToken=" + nextPageToken;
         }
-
 
         HttpClient httpclient = HttpClients.createDefault();
         HttpGet executor = new HttpGet(url);
@@ -52,7 +50,6 @@ public class YoutubeAPI {
             rd.close();
             response.setContentType("application/json");
             response.getWriter().write(result.toString());
-
         } catch (IOException e) {
             response.setStatus(500);
         }

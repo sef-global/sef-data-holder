@@ -18,7 +18,7 @@ import java.nio.charset.StandardCharsets;
 @RestController
 public class CalendarAPI {
 
-    @GetMapping("/calendar/onelive" )
+    @GetMapping("/calendar/onelive")
     public void getUpcomingOnelives(HttpServletRequest request, HttpServletResponse response) {
         String googleApiKey = System.getenv("GOOGLE_API_KEY");
         String oneliveCalendarId = System.getenv("ONELIVE_CALENDAR_ID");
