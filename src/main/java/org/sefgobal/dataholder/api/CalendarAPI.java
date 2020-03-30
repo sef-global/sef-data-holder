@@ -50,6 +50,7 @@ public class CalendarAPI {
                 result.append(line);
             }
             rd.close();
+            response.setContentType("application/json");
             response.getWriter().write(result.toString());
         } catch (IOException e) {
             response.setStatus(500);

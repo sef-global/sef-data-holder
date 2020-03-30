@@ -1,16 +1,11 @@
 package org.sefgobal.dataholder.api;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -50,6 +45,7 @@ public class YoutubeAPI {
                 result.append(line);
             }
             rd.close();
+            response.setContentType("application/json");
             response.getWriter().write(result.toString());
         } catch (IOException e) {
             response.setStatus(500);
