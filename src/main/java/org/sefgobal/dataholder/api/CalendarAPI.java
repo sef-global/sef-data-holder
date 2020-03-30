@@ -56,5 +56,4 @@ public class CalendarAPI {
             response.setStatus(500);
         }
     }
-
 }

@@ -1,12 +1,10 @@
 package org.sefgobal.dataholder.api;
 
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.web.bind.annotation.*;
-
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
