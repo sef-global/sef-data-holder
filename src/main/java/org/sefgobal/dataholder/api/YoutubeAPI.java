@@ -16,23 +16,25 @@ import java.nio.charset.StandardCharsets;
 @RestController
 public class YoutubeAPI {
 
-    private static final String MAX_RESULTS = "10";
     @GetMapping("/youtube/onelive")
-    public void getOneLive(@RequestParam(required = false) String nextPageToken, HttpServletResponse response) {
+    public void getOneLive(@RequestParam(required = false) String nextPageToken,
+                           @RequestParam(required = false) Integer maxResults,
+                           HttpServletResponse response) {
         String googleApiKey = System.getenv("GOOGLE_API_KEY");
         String youtubePlaylistId = System.getenv("YOUTUBE_PLAYLIST_ID");
         String url = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId="
                 + youtubePlaylistId
-                + "&maxResults="
-                + MAX_RESULTS
                 + "&key="
                 + googleApiKey;
-
         // Check if the user has sent a page token for the next page and add it to the url
         if (nextPageToken != null) {
             url = url + "&pageToken=" + nextPageToken;
         }
-
+        // Check if the user has sent a custom value for maxResults
+        if (maxResults != null) {
+            url = url + "&maxResults=" + maxResults;
+        }
+        // Send a request to the Youtube API
         HttpClient httpclient = HttpClients.createDefault();
         HttpGet executor = new HttpGet(url);
         try {
