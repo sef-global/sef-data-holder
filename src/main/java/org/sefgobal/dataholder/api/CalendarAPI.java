@@ -33,11 +33,10 @@ public class CalendarAPI {
         formattedDateTime = formattedDateTime.replace(":", "%3A").replace("+", "%2B");
         String url = "https://www.googleapis.com/calendar/v3/calendars/" +
                 oneliveCalendarId +
-                "/events?timeMin=" +
+                "/events?orderBy=startTime&singleEvents=true&timeMin=" +
                 formattedDateTime +
                 "&key=" +
                 googleApiKey;
-
         HttpClient httpclient = HttpClients.createDefault();
         HttpGet executor = new HttpGet(url);
         try {
