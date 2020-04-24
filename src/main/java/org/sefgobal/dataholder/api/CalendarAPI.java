@@ -6,9 +6,9 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,7 +22,8 @@ import java.time.format.DateTimeFormatter;
 public class CalendarAPI {
 
     @GetMapping("/calendar/onelive")
-    public void getUpcomingOnelives(HttpServletRequest request, HttpServletResponse response) {
+    public void getUpcomingOnelives(@RequestParam(required = false) Integer maxResults,
+                                    HttpServletResponse response) {
         String googleApiKey = System.getenv("GOOGLE_API_KEY");
         String oneliveCalendarId = System.getenv("ONELIVE_CALENDAR_ID");
         //Get the current time and format it to the RFC3339 format
@@ -37,6 +38,10 @@ public class CalendarAPI {
                 formattedDateTime +
                 "&key=" +
                 googleApiKey;
+        // Check if the user has sent a custom value for maxResults
+        if (maxResults != null) {
+            url = url + "&maxResults=" + maxResults;
+        }
         HttpClient httpclient = HttpClients.createDefault();
         HttpGet executor = new HttpGet(url);
         try {
